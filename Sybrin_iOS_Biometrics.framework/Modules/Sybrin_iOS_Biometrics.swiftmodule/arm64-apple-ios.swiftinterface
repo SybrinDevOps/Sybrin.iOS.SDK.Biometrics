@@ -8,7 +8,7 @@ import Swift
 @_exported import Sybrin_iOS_Biometrics
 import Sybrin_iOS_Common
 import UIKit
-@_inheritsConvenienceInitializers @objc final public class FaceCompareComparisonModel : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @objc final public class FaceCompareComparisonModel : ObjectiveC.NSObject, Swift.Encodable {
   @objc final public var result: Swift.Bool {
     @objc get
   }
@@ -21,6 +21,10 @@ import UIKit
   @objc final public var faceImage: UIKit.UIImage? {
     @objc get
   }
+  @objc final public var faceImagePath: Swift.String? {
+    @objc get
+  }
+  final public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
   @objc override dynamic public init()
 }
@@ -57,16 +61,21 @@ final public class SybrinBiometricsConfiguration : Sybrin_iOS_Common.SybrinCommo
   public init(license: Swift.String)
   @objc deinit
 }
-@_inheritsConvenienceInitializers @objc final public class FaceCompareModel : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @objc final public class FaceCompareModel : ObjectiveC.NSObject, Swift.Encodable {
   @objc final public var averageConfidence: Swift.Double {
     @objc get
   }
   @objc final public var targetImage: UIKit.UIImage? {
     @objc get
   }
+  @objc final public var targetImagePath: Swift.String? {
+    @objc get
+  }
   @objc final public var comparisons: [Sybrin_iOS_Biometrics.FaceCompareComparisonModel]? {
     @objc get
   }
+  @objc final public func saveImages(prefix: Swift.String? = nil, handleOnSave: ((Swift.String, UIKit.UIImage) -> Swift.Void)? = nil)
+  final public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
   @objc override dynamic public init()
 }
@@ -90,6 +99,7 @@ final public class SybrinBiometricsConfiguration : Sybrin_iOS_Common.SybrinCommo
     get
   }
   override final public func saveImages(prefix: Swift.String? = nil, handleOnSave: ((Swift.String, UIKit.UIImage) -> Swift.Void)? = nil)
+  final override public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
   @objc override dynamic public init()
 }
@@ -101,6 +111,7 @@ final public class SybrinBiometricsConfiguration : Sybrin_iOS_Common.SybrinCommo
     get
   }
   override final public func saveImages(prefix: Swift.String? = nil, handleOnSave: ((Swift.String, UIKit.UIImage) -> Swift.Void)? = nil)
+  final override public func encode(to encoder: Swift.Encoder) throws
   @objc override dynamic public init()
   @objc deinit
 }
@@ -162,7 +173,7 @@ public class SybBiometric {
   @objc final public func openFaceRecognitionAuthentication(on viewController: UIKit.UIViewController, for identifier: Swift.String, doneLaunching: Sybrin_iOS_Biometrics.SybrinBiometrics.doneLaunchingType? = nil, success: Sybrin_iOS_Biometrics.SybrinBiometrics.faceRecognitionAuthenticationSuccessCallbackType? = nil, failure: Sybrin_iOS_Biometrics.SybrinBiometrics.failureCallbackType? = nil)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers public class BiometricsModel : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers public class BiometricsModel : ObjectiveC.NSObject, Swift.Encodable {
   public var documentImage: UIKit.UIImage? {
     get
   }
@@ -176,6 +187,7 @@ public class SybBiometric {
     get
   }
   public func saveImages(prefix: Swift.String? = nil, handleOnSave: ((Swift.String, UIKit.UIImage) -> Swift.Void)? = nil)
+  public func encode(to encoder: Swift.Encoder) throws
   @objc override dynamic public init()
   @objc deinit
 }
@@ -193,10 +205,11 @@ public class SybBiometric {
     get
   }
   final public func uploadModel() -> Swift.Bool
+  final override public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
   @objc override dynamic public init()
 }
-@_hasMissingDesignatedInitializers public class LivenessDetectionQuestion {
+@_hasMissingDesignatedInitializers public class LivenessDetectionQuestion : Swift.Encodable {
   final public var actionLabel: Swift.String {
     get
   }
@@ -245,6 +258,7 @@ public class SybBiometric {
   final public var completed: Swift.Bool {
     get
   }
+  final public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
 }
 extension Sybrin_iOS_Biometrics.BiometricsStatus : Swift.Equatable {}

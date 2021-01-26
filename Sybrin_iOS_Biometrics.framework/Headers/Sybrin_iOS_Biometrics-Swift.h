@@ -229,6 +229,7 @@ SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics26FaceCompareComparisonModel")
 @property (nonatomic, readonly, copy) NSString * _Nonnull message;
 @property (nonatomic, readonly) double confidence;
 @property (nonatomic, readonly, strong) UIImage * _Nullable faceImage;
+@property (nonatomic, readonly, copy) NSString * _Nullable faceImagePath;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -237,7 +238,9 @@ SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics16FaceCompareModel")
 @interface FaceCompareModel : NSObject
 @property (nonatomic, readonly) double averageConfidence;
 @property (nonatomic, readonly, strong) UIImage * _Nullable targetImage;
+@property (nonatomic, readonly, copy) NSString * _Nullable targetImagePath;
 @property (nonatomic, readonly, copy) NSArray<FaceCompareComparisonModel *> * _Nullable comparisons;
+- (void)saveImagesWithPrefix:(NSString * _Nullable)prefix handleOnSave:(void (^ _Nullable)(NSString * _Nonnull, UIImage * _Nonnull))handleOnSave;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
