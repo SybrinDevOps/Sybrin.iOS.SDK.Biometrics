@@ -220,8 +220,34 @@ typedef SWIFT_ENUM(NSInteger, BiometricsStatus, open) {
   BiometricsStatusScanningInProgress = 3,
 };
 
-
 @class UIImage;
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics25LivenessDetectionQuestion")
+@interface LivenessDetectionQuestion : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull actionLabel;
+@property (nonatomic, readonly, copy) NSString * _Nonnull focusLabel;
+@property (nonatomic, readonly) BOOL focusBack;
+@property (nonatomic, readonly) BOOL actionCompleted;
+@property (nonatomic, readonly, strong) UIImage * _Nullable actionImage;
+@property (nonatomic, readonly, copy) NSString * _Nullable actionImagePath;
+@property (nonatomic, readonly, strong) UIImage * _Nullable actionImageCropped;
+@property (nonatomic, readonly, copy) NSString * _Nullable actionImageCroppedPath;
+@property (nonatomic, readonly) BOOL focusCompleted;
+@property (nonatomic, readonly, strong) UIImage * _Nullable focusImage;
+@property (nonatomic, readonly, copy) NSString * _Nullable focusImagePath;
+@property (nonatomic, readonly, strong) UIImage * _Nullable focusImageCropped;
+@property (nonatomic, readonly, copy) NSString * _Nullable focusImageCroppedPath;
+@property (nonatomic, readonly) BOOL completed;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics30BlinkLivenessDetectionQuestion")
+@interface BlinkLivenessDetectionQuestion : LivenessDetectionQuestion
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 
 SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics26FaceCompareComparisonModel")
 @interface FaceCompareComparisonModel : NSObject
@@ -259,8 +285,28 @@ SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics28FaceRecognitionTrainingModel")
 @end
 
 
+
 SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics22LivenessDetectionModel")
 @interface LivenessDetectionModel : BiometricsModel
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics33LookDownLivenessDetectionQuestion")
+@interface LookDownLivenessDetectionQuestion : LivenessDetectionQuestion
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics31LookUpLivenessDetectionQuestion")
+@interface LookUpLivenessDetectionQuestion : LivenessDetectionQuestion
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics30SmileLivenessDetectionQuestion")
+@interface SmileLivenessDetectionQuestion : LivenessDetectionQuestion
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -278,12 +324,39 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) SybrinBiomet
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (void)changeLogLevelTo:(enum LogLevel)logLevel;
 - (void)showToastMessageOn:(UIViewController * _Nonnull)viewController :(NSString * _Nonnull)message;
-- (void)openLivenessDetectionOn:(UIViewController * _Nonnull)viewController doneLaunching:(void (^ _Nullable)(BOOL, NSString * _Nullable))doneLaunching success:(void (^ _Nullable)(LivenessDetectionModel * _Nonnull))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure;
+- (void)openActiveLivenessDetectionOn:(UIViewController * _Nonnull)viewController actions:(NSArray<LivenessDetectionQuestion *> * _Nullable)actions doneLaunching:(void (^ _Nullable)(BOOL, NSString * _Nullable))doneLaunching success:(void (^ _Nullable)(LivenessDetectionModel * _Nonnull))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure;
+- (void)openActivePassiveLivenessDetectionOn:(UIViewController * _Nonnull)viewController actions:(NSArray<LivenessDetectionQuestion *> * _Nullable)actions doneLaunching:(void (^ _Nullable)(BOOL, NSString * _Nullable))doneLaunching success:(void (^ _Nullable)(LivenessDetectionModel * _Nonnull))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure;
+- (void)openPassiveLivenessDetectionOn:(UIViewController * _Nonnull)viewController doneLaunching:(void (^ _Nullable)(BOOL, NSString * _Nullable))doneLaunching success:(void (^ _Nullable)(LivenessDetectionModel * _Nonnull))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure;
+- (void)doPassiveLivenessDetectionWithImageWith:(UIImage * _Nonnull)image success:(void (^ _Nullable)(LivenessDetectionModel * _Nonnull))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure;
 - (void)compareFaces:(UIImage * _Nonnull)target :(NSArray<UIImage *> * _Nonnull)comparisons :(void (^ _Nonnull)(FaceCompareModel * _Nullable, NSString * _Nullable))completion;
 - (void)openFaceRecognitionTrainingOn:(UIViewController * _Nonnull)viewController for:(NSString * _Nonnull)identifier :(void (^ _Nonnull)(FaceRecognitionTrainingModel * _Nullable, NSString * _Nullable))completion;
 - (void)openFaceRecognitionAuthenticationOn:(UIViewController * _Nonnull)viewController for:(NSString * _Nonnull)identifier doneLaunching:(void (^ _Nullable)(BOOL, NSString * _Nullable))doneLaunching success:(void (^ _Nullable)(FaceRecognitionAuthenticationModel * _Nonnull))success failure:(void (^ _Nullable)(NSString * _Nonnull))failure;
 @end
 
+
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics37TiltHeadLeftLivenessDetectionQuestion")
+@interface TiltHeadLeftLivenessDetectionQuestion : LivenessDetectionQuestion
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics38TiltHeadRightLivenessDetectionQuestion")
+@interface TiltHeadRightLivenessDetectionQuestion : LivenessDetectionQuestion
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics37TurnHeadLeftLivenessDetectionQuestion")
+@interface TurnHeadLeftLivenessDetectionQuestion : LivenessDetectionQuestion
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC21Sybrin_iOS_Biometrics38TurnHeadRightLivenessDetectionQuestion")
+@interface TurnHeadRightLivenessDetectionQuestion : LivenessDetectionQuestion
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 #if __has_attribute(external_source_symbol)
